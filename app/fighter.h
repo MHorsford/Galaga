@@ -10,13 +10,6 @@ using std::endl;
 
 class Fighter{
 
-    private:
-    std::string name;
-    int health;
-    double speed;
-    int atk;
-    bool alive;
-
     public:
     Fighter();
     Fighter(const std::string name, int health, double speed, int atk, bool alive);
@@ -27,7 +20,6 @@ class Fighter{
     void defeat();
 
     
-    //set and get
     void set_name(const std::string newName);
     std::string get_name() const;
 
@@ -44,5 +36,14 @@ class Fighter{
     bool isAlive() const;
 
     void getInfo() const;
+
+
+    private:
+    std::string name;
+    int health;
+    double speed;
+    int atk;
+    bool alive;
+
 };
 

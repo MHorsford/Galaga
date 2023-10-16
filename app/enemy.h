@@ -8,16 +8,9 @@ using std::string;
 
 class Enemy{
 
-    private:
-    std::string name;
-    int health;
-    const int damage;
-    double speed;
-
-    bool alive;
-
     public:
 // item 1
+    Enemy();
     Enemy(const std::string name, int health, const int damage, double speed, bool alive);
     Enemy(const Enemy& copyEnemy);
 
@@ -42,5 +35,14 @@ class Enemy{
     bool isAlive() const;
 
     void getInfo() const;
+
+
+    private:
+    std::string name;
+    int health;
+    const int damage;
+    double speed;
+    bool alive;
+
 
 };

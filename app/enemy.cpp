@@ -1,6 +1,6 @@
 #include "enemy.h"
 
-
+Enemy::Enemy() : name("Enemy"), health(100), damage(1000), speed(1.0), alive(true) {}
 Enemy::Enemy(const std::string name, int health, const int damage, double speed, bool alive)
     : name(name), health(health), damage(damage), speed(speed), alive(alive) {}
 Enemy::Enemy(const Enemy& copyEnemy)
@@ -54,6 +54,11 @@ void Enemy::set_speed(double newSpeed){
 double Enemy::get_speed() const{
     return speed;
 }
+
+int Enemy::get_damage() const {
+    return damage;
+}
+
 
 void Enemy::setIsAlive(bool value) {
     alive = value;
