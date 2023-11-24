@@ -1,0 +1,7 @@
+alive=true
+damage=200
+health=10000
+name=Player_1
+posiX=0
+posiY=0
+speed=7.000000

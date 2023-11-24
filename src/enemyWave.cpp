@@ -11,7 +11,7 @@ nextEntrieInHist(other.nextEntrieInHist), score(nullptr) {
         histPtr[i] = other.histPtr[i];
     }
 }
-
+// implementar o contrutor copiar
 
 EnemyWave::~EnemyWave() {
     delete[] histPtr;
@@ -23,6 +23,10 @@ void EnemyWave::addEnemy(const Enemy& enemy) {
 
 void EnemyWave::clearWave() {
     enemies.clear();
+}
+
+const std::vector<Enemy>& EnemyWave::getWaveEnemy() const{
+    return enemies;
 }
 
 void EnemyWave::alocarHist(int numEnemy) {
@@ -59,13 +63,14 @@ void EnemyWave::cadRegInHist(int numEnemy) {
 }
 
 int EnemyWave::calculateWaveScore() const {
-    int totalScore = 0;
- 
-    for (const Enemy& enemy : enemies) {
-        if (enemy.isAlive()) {
+    auto totalScore = 0;
+    
+    std::for_each(enemies.begin(), enemies.end(), [&totalScore]( const Enemy& enemy){
+        if (enemy.isAlive()){
             totalScore += enemy.get_damage();
-        }
-    }
+            }
+    });
+
 
     return totalScore;
 }
@@ -87,7 +92,8 @@ void EnemyWave::getInfo() const {
         cout << "Saude: " << enemy.get_health() << "\n";
         cout << "Velocidade: " << enemy.get_speed() << "\n";
         cout << "Ataque: " << enemy.get_damage() << "\n";
-        cout << "Vivo: " << (enemy.isAlive() ? "Sim" : "Não") << "\n";
+        cout << "Vivo: " << (enemy.isAlive() ? "Yes" : "No") << "\n";
+        cout<<"X: "<<enemy.get_positionX()<<" | "<<"Y: "<<enemy.get_positionY()<<"\n";
     }
 }
 

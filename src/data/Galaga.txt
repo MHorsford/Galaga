@@ -1,0 +1,8 @@
+alive=true
+damage=50
+health=100
+name=Galaga
+posiX=10
+posiY=10
+score=20
+speed=5.000000

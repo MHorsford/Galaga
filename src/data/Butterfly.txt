@@ -1,0 +1,8 @@
+alive=true
+damage=75
+health=200
+name=Butterfly
+posiX=20
+posiY=20
+score=30
+speed=7.000000

@@ -1,6 +1,9 @@
 .vscode
+.vs
+build
+assets
+UML_Diagrams
 copyMain.cpp
 galaga.exe
-TesteInterface
-assets
-.vs
+SDL2.dll
+

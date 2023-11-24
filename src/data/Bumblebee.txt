@@ -1,0 +1,8 @@
+alive=true
+damage=100
+health=300
+name=Bumblebee
+posiX=30
+posiY=30
+score=40
+speed=9.000000
