@@ -27,8 +27,8 @@ void Enemy::attack(Fighter& target) const{
     }
 }
 
-void Enemy::shootBullet(double bulletX, double bulletY){
-    Bullet* newBullet = new Bullet(bulletX, bulletY);
+void Enemy::shootBullet(double bulletX, double bulletY, bool isPlayerBullet){
+    Bullet* newBullet = new Bullet(bulletX, bulletY, false);
     enemyBullet.push_back(newBullet); 
 }
 
@@ -61,6 +61,11 @@ Enemy& Enemy::operator=(const Enemy& otherEnemy){
     if (*this != otherEnemy){
         name = otherEnemy.name;
         health = otherEnemy.health;
+        damage = otherEnemy.damage;
+        speed = otherEnemy.speed;
+        posiX = otherEnemy.posiX;
+        posiY = otherEnemy.posiY;
+        score = otherEnemy.score;
         alive = otherEnemy.alive;
     }
     return *this;
@@ -174,7 +179,8 @@ Boss::Boss(const string name, int health, int damage, double speed, int posiX, i
     const SpecialAbilities& skill): Enemy(name, health, damage, speed, posiX, posiY, score, alive), skill(skill) {}
 Boss::Boss(const Boss& copyBoss): Enemy(copyBoss) {}
 
-void Boss::activateSkills(){
+
+void Boss::activateSkillsDamage(){
     std::chrono::steady_clock::time_point lastSkill;
     int originDamage = get_damage();
     cout<<"Init Damage: "<<get_damage()<<"\n";
@@ -198,11 +204,63 @@ void Boss::activateSkills(){
         }
     }
 }
+void Boss::activateSkillsHealth(){
+    if (this->isAlive()){
+        if (rand() % 100 < 20){
+            int currentHealth = get_health();
+            int healAmount = currentHealth * 0.05;
+            set_health(currentHealth + healAmount);
+
+        }    
+    }
+}
+void Boss::attack(Fighter& target) const{
+    if(target.isAlive()) {
+        target.set_health(target.get_health() - get_damage());
+        if (target.get_health() == 0) {
+            target.defeat();  // Lutador morto
+            cout << "Fighter destruido!!!" << "\n";
+        } else {
+            cout << "Fighter Sobreviveu!!!" << "\n";
+        }
+    }
+}
+
+//sobrecarga
+Boss& Boss::operator=(const Boss& otherBoss){
+    if(this != &otherBoss){
+        Enemy::operator=(otherBoss);
+        skill = otherBoss.skill;
+        skillActive = otherBoss.skillActive;
+    }
+    return *this;
+}
 
 
 // Mini-Boss
 
-MiniBoss::MiniBoss(): Boss("Mini Boss",5000, 100, 7.0, 100, 100, 500, true, SpecialAbilities()) {}
+MiniBoss::MiniBoss(): Boss("Mini Boss",1000, 10, 5.0, 100, 100, 500, true, SpecialAbilities()) {}
 MiniBoss::MiniBoss(const string name, int health, int damage, double speed, int posiX, int posiY, int score, bool alive)
         : Boss(name, health, damage, speed, posiX, posiY, score, alive, SpecialAbilities()) {}
 MiniBoss::MiniBoss(const MiniBoss& copyMiniBoss): Boss(copyMiniBoss) {}
+
+
+void MiniBoss::attack(Fighter& target) const{
+    if(target.isAlive()) {
+        target.set_health(target.get_health() - get_damage());
+        if (target.get_health() == 0) {
+            target.defeat();  // Lutador morto
+            cout << "Fighter destruido!!!" << "\n";
+        } else {
+            cout << "Fighter Sobreviveu!!!" << "\n";
+        }
+    }
+}
+
+//sobrecarga
+MiniBoss& MiniBoss::operator=(const MiniBoss& otherMiniBoss){
+    if(this != &otherMiniBoss){
+        Boss::operator=(otherMiniBoss);
+    }
+    return *this;
+}

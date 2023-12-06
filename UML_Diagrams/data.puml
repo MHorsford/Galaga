@@ -1,0 +1,14 @@
+@startuml
+class Data {
+    - day: int
+    - month: int
+    - year: int
+    + Data()
+    + Data(day: int, month: int, year: int)
+    + getDay(): int
+    + getMonth(): int
+    + getYear(): int
+    + toString(): std::string
+}
+
+@enduml

@@ -1,0 +1,8 @@
+alive=true
+damage=200
+health=10000
+name=Boss
+posiX=100.000000
+posiY=100
+score=1000
+speed=7.000000

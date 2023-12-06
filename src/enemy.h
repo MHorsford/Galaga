@@ -23,11 +23,10 @@ class Enemy{
     Enemy(const Enemy& copyEnemy);
     ~Enemy();
 
-    void attack(Fighter& target) const;
+    virtual void attack(Fighter& target) const;
     void limitNameLength(const int MAXLENGTH);
     void move();
     void defeat();
-
     void saveConfig();
     void loadConfig(const string& filename);
 
@@ -37,7 +36,7 @@ class Enemy{
     bool operator!=(const Enemy& otherEnemy) const;
     Enemy& operator=(const Enemy& otherEnemy);
     friend std::ostream& operator<<(std::ostream& out, const Enemy& enemy);
-    void shootBullet(double bulletX, double bulletY);
+    void shootBullet(double bulletX, double bulletY, bool isPlayerBullet);
 
     // getters e setters
     void set_name(const std::string newName);
@@ -95,7 +94,14 @@ class Boss : public Enemy{
     Boss(const string name, int health, int damage, double speed, int posiX, int posiY, int score, bool alive, const SpecialAbilities& skill);
     Boss(const Boss& copyBoss);
 
-    void activateSkills();
+    void activateSkillsDamage();
+    void activateSkillsHealth();
+    void attack(Fighter& target) const override;
+
+
+    // sobrecarga
+    Boss& operator=(const Boss& otherBoss);
+
     private:
     SpecialAbilities skill;
     const int SKILL_INTERVAL = 30;
@@ -106,10 +112,16 @@ class Boss : public Enemy{
 };
 
 class MiniBoss : public Boss{
+
     public:
+
     MiniBoss();
     MiniBoss(const string name, int health, int damage, double speed, int posiX, int posiY, int score, bool alive);
     MiniBoss(const MiniBoss& copyMiniBoss);
+
+    void attack(Fighter& target) const override;
+    // sobrecarga
+    MiniBoss& operator=(const MiniBoss& otherMiniBoss);
 };
 
 #endif

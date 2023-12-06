@@ -88,12 +88,14 @@ void EnemyWave::getInfo() const {
 
     cout << "Pontuacao da Wave: " << calculateWaveScore() << "\n";
     for (const Enemy& enemy : enemies) {
+
         cout << "Nome do Inimigo: " << enemy.get_name() << "\n";
         cout << "Saude: " << enemy.get_health() << "\n";
         cout << "Velocidade: " << enemy.get_speed() << "\n";
         cout << "Ataque: " << enemy.get_damage() << "\n";
         cout << "Vivo: " << (enemy.isAlive() ? "Yes" : "No") << "\n";
         cout<<"X: "<<enemy.get_positionX()<<" | "<<"Y: "<<enemy.get_positionY()<<"\n";
+        cout << "\n";
     }
 }
 

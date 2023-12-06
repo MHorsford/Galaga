@@ -11,8 +11,8 @@ class Bullet{
     Bullet(double bulletX, double bulletY, bool isPlayerBullet);
     Bullet(const Bullet& copyBullet);
 
-    void moveBullet(){};
-    void updateBullet(){};
+    void moveBullet();
+    //void updateBullet(){};
 
     private:
     int bulletX;
@@ -26,10 +26,10 @@ class Bullet{
 
 class Laser: public Bullet{
     public:
+
     Laser();
-    Laser(double bulletX, double bulletY, double speed, bool active);
+    Laser(double bulletX, double bulletY, bool isPlayerBullet);
     Laser(const Laser& copyLaser);
-    private:
 };
 
 #endif

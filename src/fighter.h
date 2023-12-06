@@ -11,7 +11,6 @@ using std::vector;
 #include <map>
 using std::map;
 #include "data.h"
-
 #include "configManager.h"
 
 
@@ -44,6 +43,7 @@ class Fighter{
     void calculatePlayerScore(const Enemy& enemy);
     void addPowerUp(const std::string& name, int effect);
     virtual void shootBullet(double bulletX, double bulletY, bool isPlayerBullet);
+    // renderização da nave
 
     void saveConfig();
     void loadConfig(const string& filename);
@@ -111,12 +111,13 @@ class Interceptor : public Fighter{
 
 };
 
-class Destroyer : public Fighter{
-    public:
+class Destroyer : public Interceptor{
 
+    public:
+    
     Destroyer();
     Destroyer(const std::string name, int health, double speed, int damage, double posiX, double posiY, bool alive);
-    Destroyer(const Destroyer& copyDestroyer);
+    Destroyer(const Destroyer& copyDestroyer);	
 
     void shootBullet(double bulletX, double bulletY, bool isPlayerBullet) override;
 };

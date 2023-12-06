@@ -202,6 +202,7 @@ Interceptor::Interceptor(const std::string name, int health, double speed, int d
             : Fighter(name, health, speed, damage, posiX, posiY, alive) {}
 Interceptor::Interceptor(const Interceptor& copyInterceptor): Fighter(copyInterceptor) {}
 
+
 void Interceptor::shootBullet(double bulletX, double bulletY, bool isPlayerBullet){
     Bullet* newBullet1 = new Bullet(bulletX, bulletY, true);
     Bullet* newBullet2 = new Bullet(bulletX, bulletY, true);
@@ -210,10 +211,10 @@ void Interceptor::shootBullet(double bulletX, double bulletY, bool isPlayerBulle
 }
     
 // Class Destroyer
-Destroyer::Destroyer(): Fighter("Destroyer", 15000, 4.0, 100, 0, 0, true) {}
+Destroyer::Destroyer(): Interceptor("Destroyer", 15000, 4.0, 100, 0, 0, true) {}
 Destroyer::Destroyer(const std::string name, int health, double speed, int damage, double posiX, double posiY, bool alive)
-            : Fighter(name, health, speed, damage, posiX, posiY, alive) {}
-Destroyer::Destroyer(const Destroyer& copyDestroyer): Fighter(copyDestroyer) {}
+            : Interceptor(name, health, speed, damage, posiX, posiY, alive) {}
+Destroyer::Destroyer(const Destroyer& copyDestroyer): Interceptor(copyDestroyer) {}
 
 void Destroyer::shootBullet(double bulletX, double bulletY, bool isPlayerBullet){
     Bullet* newBullet1 = new Bullet(bulletX, bulletY, true);

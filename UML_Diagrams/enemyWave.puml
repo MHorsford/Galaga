@@ -1,0 +1,21 @@
+@startuml
+class EnemyWave {
+    - enemies: vector<Enemy>
+    - histPtr: int*
+    - histSize: int
+    - nextEntrieInHist: int
+    - score: int*
+    + EnemyWave()
+    + EnemyWave(other: EnemyWave&)
+    + ~EnemyWave()
+    + addEnemy(enemy: Enemy)
+    + clearWave()
+    + getWaveEnemy(): const vector<Enemy>&
+    + cadRegInHist(numEnemy: int)
+    + calculateWaveScore(): int
+    + getInfo()
+    + displayMemoryAllocationInfo()
+}
+
+EnemyWave *-- Enemy
+@enduml

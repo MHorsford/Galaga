@@ -1,5 +1,5 @@
 alive=true
-damage=200
+damage=100000
 health=10000
 name=Player_1
 posiX=0

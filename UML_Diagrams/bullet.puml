@@ -1,0 +1,22 @@
+@startuml
+
+class Bullet {
+    - bulletX: int 
+    - bulletY: int
+    - speed: double
+    - active: bool
+    - isPlayerBullet: bool
+    - MAX_SPEED: static const double
+    + Bullet()
+    + Bullet(bulletX: double, bulletY: double, isPlayerBullet: bool)
+    + Bullet(copyBullet: Bullet&)
+    + moveBullet()
+}
+
+class Laser {
+    + Laser()
+    + Laser(bulletX: double, bulletY: double, isPlayerBullet: bool)
+    + Laser(copyLaser: Laser&)
+}
+
+Bullet <|-- Laser

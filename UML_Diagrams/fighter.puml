@@ -1,0 +1,78 @@
+@startuml
+
+class Fighter {
+    - configManager: ConfigManager
+    - powerUps: vector<PowerUp>
+    - playerScore: map<string, int>
+    - data: Data
+    - score: int
+    - name: string
+    - health: int
+    - speed: double
+    - damage: int
+    - alive: bool
+    - posiX: double
+    - posiY: double
+    # fighterBullet: vector<Bullet*>
+    + Fighter()
+    + Fighter(name: string, health: int, speed: double, damage: int, posiX: double, posiY: double, alive: bool)
+    + Fighter(copyFighter: Fighter&)
+    + ~Fighter()
+    + move()
+    + defeat()
+    + specialAbility()
+    + attack(target: EnemyWave&)
+    + calculatePlayerScore(enemy: Enemy&)
+    + addPowerUp(name: string, effect: int)
+    + virtual shootBullet(bulletX: double, bulletY: double, isPlayerBullet: bool)
+    + saveConfig()
+    + loadConfig(filename: string)
+    + getUserData(): Data
+    + printUserData()
+    + set_name(newName: string)
+    + get_name(): string
+    + set_positionX(newPosiX: double)
+    + set_positionY(newPosiY: double)
+    + get_positionX(): double
+    + get_positionY(): double
+    + set_health(newHealth: int)
+    + get_health(): int
+    + set_speed(newSpeed: double)
+    + get_speed(): double
+    + set_atk(newAtk: int)
+    + get_atk(): int
+    + setIsAlive(value: bool)
+    + isAlive(): bool
+    + get_score(name: string): int
+    + getPlayerScore(): map<string, int>
+}
+
+class Interceptor {
+    + Interceptor()
+    + Interceptor(name: string, health: int, speed: double, damage: int, posiX: double, posiY: double, alive: bool)
+    + Interceptor(copyInterceptor: Interceptor&)
+    + shootBullet(bulletX: double, bulletY: double, isPlayerBullet: bool)
+}
+
+class Destroyer {
+    + Destroyer()
+    + Destroyer(name: string, health: int, speed: double, damage: int, posiX: double, posiY: double, alive: bool)
+    + Destroyer(copyDestroyer: Destroyer&)
+    + shootBullet(bulletX: double, bulletY: double, isPlayerBullet: bool)
+}
+
+Fighter <|-- Interceptor
+Interceptor <|-- Destroyer
+Fighter *-- ConfigManager
+Fighter *-- PowerUp
+Fighter *-- Bullet
+Fighter o-- EnemyWave
+Fighter o-- Enemy
+Fighter <-- Data
+
+
+
+
+
+
+@enduml

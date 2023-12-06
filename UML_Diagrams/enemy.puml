@@ -1,0 +1,71 @@
+@startuml
+
+class Enemy {
+    - configManager: ConfigManager
+    - name: string
+    - enemyBullet: vector<Bullet*>
+    - health: int
+    - damage: int
+    - speed: double
+    - alive: bool
+    - posiX: double
+    - posiY: int
+    - score: int
+    + Enemy()
+    + Enemy(name: string, health: int, damage: int, speed: double, posiX: double, posiY: double, score: int, alive: bool)
+    + Enemy(copyEnemy: Enemy&)
+    + ~Enemy()
+    + attack(target: Fighter&) const
+    + limitNameLength(MAXLENGTH: int)
+    + move()
+    + defeat()
+    + saveConfig()
+    + loadConfig(filename: string)
+    + shootBullet(bulletX: double, bulletY: double, isPlayerBullet: bool)
+    + set_name(newName: string)
+    + get_name(): string
+    + set_positionX(newPosiX: double)
+    + set_positionY(newPosiY: double)
+    + get_positionX(): double
+    + get_positionY(): double
+    + set_health(newHealth: int)
+    + get_health(): int
+    + set_damage(newDamage: int)
+    + get_damage(): int
+    + set_speed(newSpeed: double)
+    + get_speed(): double
+    + setIsAlive(value: bool)
+    + isAlive(): bool
+    + get_score(): int
+}
+
+struct SpecialAbilities {
+    - skillInterval: int
+    - skillDuration: int
+}
+
+class Boss {
+    - skill: SpecialAbilities
+    - SKILL_INTERVAL: const int
+    - SKILL_DURATION: const int
+    - skillActive: bool = false
+    + Boss()
+    + Boss(name: string, health: int, damage: int, speed: double, posiX: int, posiY: int, score: int, alive: bool, skill: SpecialAbilities&)
+    + Boss(copyBoss: Boss&)
+    + activateSkills()
+    + operator=(otherBoss: Boss&): Boss&
+}
+
+class MiniBoss {
+    + MiniBoss()
+    + MiniBoss(name: string, health: int, damage: int, speed: double, posiX: int, posiY: int, score: int, alive: bool)
+    + MiniBoss(copyMiniBoss: MiniBoss&)
+}
+
+Enemy <|-- Boss
+Boss <|-- MiniBoss
+Boss *-- SpecialAbilities
+Enemy *-- ConfigManager
+Enemy *-- Bullet
+Enemy --o Fighter
+@enduml
