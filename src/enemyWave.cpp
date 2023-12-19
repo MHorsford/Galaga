@@ -11,7 +11,6 @@ nextEntrieInHist(other.nextEntrieInHist), score(nullptr) {
         histPtr[i] = other.histPtr[i];
     }
 }
-// implementar o contrutor copiar
 
 EnemyWave::~EnemyWave() {
     delete[] histPtr;

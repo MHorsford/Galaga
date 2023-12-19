@@ -12,29 +12,29 @@ class Enemy {
     - posiY: int
     - score: int
     + Enemy()
-    + Enemy(name: string, health: int, damage: int, speed: double, posiX: double, posiY: double, score: int, alive: bool)
-    + Enemy(copyEnemy: Enemy&)
+    + Enemy(string, int, int, double, double, double, int, bool)
+    + Enemy(Enemy&)
     + ~Enemy()
-    + attack(target: Fighter&) const
-    + limitNameLength(MAXLENGTH: int)
+    + attack(Fighter&) const
+    + limitNameLength(int)
     + move()
     + defeat()
     + saveConfig()
-    + loadConfig(filename: string)
-    + shootBullet(bulletX: double, bulletY: double, isPlayerBullet: bool)
-    + set_name(newName: string)
+    + loadConfig(string)
+    + shootBullet(double, double, bool)
+    + set_name(string)
     + get_name(): string
-    + set_positionX(newPosiX: double)
-    + set_positionY(newPosiY: double)
+    + set_positionX(double)
+    + set_positionY(double)
     + get_positionX(): double
     + get_positionY(): double
-    + set_health(newHealth: int)
+    + set_health(int)
     + get_health(): int
-    + set_damage(newDamage: int)
+    + set_damage(int)
     + get_damage(): int
-    + set_speed(newSpeed: double)
+    + set_speed(double)
     + get_speed(): double
-    + setIsAlive(value: bool)
+    + setIsAlive(bool)
     + isAlive(): bool
     + get_score(): int
 }
@@ -48,9 +48,9 @@ class Boss {
     - skill: SpecialAbilities
     - SKILL_INTERVAL: const int
     - SKILL_DURATION: const int
-    - skillActive: bool = false
+    - skillActive: bool
     + Boss()
-    + Boss(name: string, health: int, damage: int, speed: double, posiX: int, posiY: int, score: int, alive: bool, skill: SpecialAbilities&)
+    + Boss(string, int, int, double, int, int, int, bool, SpecialAbilities&)
     + Boss(copyBoss: Boss&)
     + activateSkills()
     + operator=(otherBoss: Boss&): Boss&
@@ -58,7 +58,7 @@ class Boss {
 
 class MiniBoss {
     + MiniBoss()
-    + MiniBoss(name: string, health: int, damage: int, speed: double, posiX: int, posiY: int, score: int, alive: bool)
+    + MiniBoss(string, int, int, double, int, int, int, bool)
     + MiniBoss(copyMiniBoss: MiniBoss&)
 }
 

@@ -1,0 +1,7 @@
+alive=true
+damage=100
+health=5000
+name=Fighter
+posiX=0.000000
+posiY=0.000000
+speed=7.000000

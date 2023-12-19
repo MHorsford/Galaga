@@ -1,0 +1,7 @@
+alive=true
+damage=75
+health=7000
+name=Interceptor
+posiX=0.000000
+posiY=0.000000
+speed=10.000000

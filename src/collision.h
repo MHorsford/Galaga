@@ -4,12 +4,14 @@
 #include "enemyWave.h"
 
 
+class Bullet;
 class Collision{
     public:
 
-    // Verifica se no vetor existe um inimigo com a mesma posição(X) que o inimigo que ira ser adicionado
     void waveCollision(EnemyWave& wave, Enemy& newEnemy);
-    //void bulletCollision();
+    bool checkCollision(Fighter& fighter, Enemy& enemy, Bullet& bullet);
+
+
     private:
 };
 

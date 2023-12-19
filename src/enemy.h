@@ -12,12 +12,9 @@ using std::string;
 
 
 
-
-
 class Enemy{
 
     public:
-// item 1
     Enemy();
     Enemy(const string name, int health, int damage, double speed, double posiX, double posiY, int score, bool alive);
     Enemy(const Enemy& copyEnemy);
@@ -61,7 +58,6 @@ class Enemy{
 
     int get_score() const;
 
-    //void getInfo() const;
 
 
     private:

@@ -1,0 +1,7 @@
+alive=true
+damage=100
+health=15000
+name=Destroyer
+posiX=0.000000
+posiY=0.000000
+speed=4.000000

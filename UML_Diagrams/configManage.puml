@@ -3,11 +3,11 @@ class ConfigManager {
     - filename: string
     - configValue: map<string, string>
     + ConfigManager()
-    + ConfigManager(filename: const string&)
-    + ConfigManager(copyConfigManager: const ConfigManager&)
+    + ConfigManager(const string&)
+    + ConfigManager(const ConfigManager&)
     + loadConfig(): bool
     + saveConfig(): bool
-    + getValue(key: const string&) const: string
-    + setValue(key: const string&, value: const string&)
+    + getValue(const string&) const string
+    + setValue(const string&, const string&)
 }
 @enduml

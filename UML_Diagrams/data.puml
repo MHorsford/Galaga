@@ -4,11 +4,11 @@ class Data {
     - month: int
     - year: int
     + Data()
-    + Data(day: int, month: int, year: int)
+    + Data(int, int, int)
     + getDay(): int
     + getMonth(): int
     + getYear(): int
-    + toString(): std::string
+    + toString(): string
 }
 
 @enduml

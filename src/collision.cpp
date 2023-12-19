@@ -13,5 +13,16 @@ void Collision::waveCollision(EnemyWave& wave, Enemy& newEnemy){
         }
     }
     wave.addEnemy(newEnemy);
-    
 };
+
+bool Collision::checkCollision(Fighter& fighter, Enemy& enemy, Bullet& bullet){
+    if (bullet.get_isPlayerBullet() && bullet.get_positionX() == enemy.get_positionX() 
+        && bullet.get_positionY() == enemy.get_positionY()){
+        return true;
+    } else if (!bullet.get_isPlayerBullet() && bullet.get_positionX() == fighter.get_positionX() 
+        && bullet.get_positionY() == fighter.get_positionY()){
+        return true;
+    }
+    return false;
+};
+

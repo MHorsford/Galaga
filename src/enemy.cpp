@@ -2,7 +2,7 @@
 
 
 //Enemy Constuctor
-Enemy::Enemy() : name("Enemy"), health(1000), damage(100), speed(7.0), posiX(100.0), posiY(100.0), score(100), alive(true) {}
+Enemy::Enemy() : name("Enemy"), health(1000), damage(100), speed(7.0), posiX(0.0), posiY(50.0), score(100), alive(true) {}
 Enemy::Enemy(const string name, int health, int damage, double speed, double posiX, double posiY, int score, bool alive)
     : name(name), health(health), damage(damage), speed(speed), posiX(posiX), posiY(posiY), score(score), alive(alive) {}
 Enemy::Enemy(const Enemy& copyEnemy)
@@ -29,7 +29,7 @@ void Enemy::attack(Fighter& target) const{
 
 void Enemy::shootBullet(double bulletX, double bulletY, bool isPlayerBullet){
     Bullet* newBullet = new Bullet(bulletX, bulletY, false);
-    enemyBullet.push_back(newBullet); 
+    enemyBullet.push_back(newBullet);
 }
 
 void Enemy::limitNameLength(const int MAXLENGTH) {
@@ -246,6 +246,7 @@ MiniBoss::MiniBoss(const MiniBoss& copyMiniBoss): Boss(copyMiniBoss) {}
 
 
 void MiniBoss::attack(Fighter& target) const{
+    // vincular dano ao fighter apenas se a bala tiver atingido
     if(target.isAlive()) {
         target.set_health(target.get_health() - get_damage());
         if (target.get_health() == 0) {

@@ -1,78 +1,105 @@
 @startuml
 
-class Fighter {
-    - configManager: ConfigManager
-    - powerUps: vector<PowerUp>
-    - playerScore: map<string, int>
-    - data: Data
-    - score: int
-    - name: string
-    - health: int
-    - speed: double
-    - damage: int
-    - alive: bool
-    - posiX: double
-    - posiY: double
-    # fighterBullet: vector<Bullet*>
-    + Fighter()
-    + Fighter(name: string, health: int, speed: double, damage: int, posiX: double, posiY: double, alive: bool)
-    + Fighter(copyFighter: Fighter&)
-    + ~Fighter()
-    + move()
-    + defeat()
-    + specialAbility()
-    + attack(target: EnemyWave&)
-    + calculatePlayerScore(enemy: Enemy&)
-    + addPowerUp(name: string, effect: int)
-    + virtual shootBullet(bulletX: double, bulletY: double, isPlayerBullet: bool)
-    + saveConfig()
-    + loadConfig(filename: string)
-    + getUserData(): Data
-    + printUserData()
-    + set_name(newName: string)
-    + get_name(): string
-    + set_positionX(newPosiX: double)
-    + set_positionY(newPosiY: double)
-    + get_positionX(): double
-    + get_positionY(): double
-    + set_health(newHealth: int)
-    + get_health(): int
-    + set_speed(newSpeed: double)
-    + get_speed(): double
-    + set_atk(newAtk: int)
-    + get_atk(): int
-    + setIsAlive(value: bool)
-    + isAlive(): bool
-    + get_score(name: string): int
-    + getPlayerScore(): map<string, int>
+class SpaceShip {
+  -name: string
+  -health: int
+  -speed: double
+  -damage: int
+  -alive: bool
+  -posiX: double
+  -posiY: double
+  #<<enumeration>> BulletType{NORMAL, LASER, MISSILE}
+  #MAX_SPEED: const static double
+  #currentBullet: BulletType
+  +SpaceShip()
+  +SpaceShip(const string, int, double, int, double, double, bool)
+  +SpaceShip(const SpaceShip&)
+  +virtual ~SpaceShip()
+  +virtual move() = 0
+  +virtual attack(EnemyWave&) = 0
+  +virtual saveConfig() = 0
+  +virtual loadConfig(const string&) = 0
+  +set_name(const std::string)
+  +get_name(): std::string
+  +set_positionX(double)
+  +set_positionY(double)
+  +get_positionX(): double
+  +get_positionY(): double
+  +set_health(int)
+  +get_health(): int
+  +set_speed(double)
+  +get_speed(): double
+  +set_atk(int)
+  +get_atk(): int
+  +setIsAlive(bool)
+  +isAlive(): bool
 }
+
+class SpaceShipII {
+  +SpaceShipII()
+  +SpaceShipII(const string, int, double, int, double, double, bool)
+  +SpaceShipII(const SpaceShipII&)
+  +virtual ~SpaceShipII()
+  +virtual evade() = 0
+  +virtual shield() = 0
+}
+
+class Fighter {
+  -configManager: ConfigManager
+  -powerUps: std::vector<PowerUp>
+  -playerScore: map<string, int>
+  -data: Data
+  -score: int
+  #fighterBullet: vector<Bullet*>
+  +Fighter()
+  +Fighter(const std::string, int, double, int, double, double, bool)
+  +Fighter(const Fighter&)
+  +~Fighter()
+  +move() override
+  +defeat()
+  +specialAbility()
+  +attack(EnemyWave&) override
+  +calculatePlayerScore(const Enemy&)
+  +addPowerUp(const string&, int)
+  +shootBullet(double, double, bool)
+  +update()
+  +saveConfig() override
+  +loadConfig(const string&) override
+  +evade() override
+  +shield() override
+  +getUserData(): Data
+  +printUserData() const
+  +get_score(string): int
+  +getPlayerScore(): map<string, int>
+  +getBullet(): vector<Bullet*>
+}
+
 
 class Interceptor {
-    + Interceptor()
-    + Interceptor(name: string, health: int, speed: double, damage: int, posiX: double, posiY: double, alive: bool)
-    + Interceptor(copyInterceptor: Interceptor&)
-    + shootBullet(bulletX: double, bulletY: double, isPlayerBullet: bool)
+  -laserCount: int
+  +Interceptor()
+  +Interceptor(const string, int, double, int, double, double, bool)
+  +Interceptor(const Interceptor&)
+  +shootBullet(double, double, bool) override
+  +evade() override
+  +shield() override
+  +laser()
 }
+
 
 class Destroyer {
-    + Destroyer()
-    + Destroyer(name: string, health: int, speed: double, damage: int, posiX: double, posiY: double, alive: bool)
-    + Destroyer(copyDestroyer: Destroyer&)
-    + shootBullet(bulletX: double, bulletY: double, isPlayerBullet: bool)
+  -missileCount: int
+  +Destroyer()
+  +Destroyer(const string, int, double, int, double, double, bool)
+  +Destroyer(const Destroyer&)
+  +shootBullet(double, double, bool) override
+  +evade() override
+  +shield() override
+  +missile()
 }
 
+SpaceShip <|-- SpaceShipII
+SpaceShipII <|-- Fighter
 Fighter <|-- Interceptor
 Interceptor <|-- Destroyer
-Fighter *-- ConfigManager
-Fighter *-- PowerUp
-Fighter *-- Bullet
-Fighter o-- EnemyWave
-Fighter o-- Enemy
-Fighter <-- Data
-
-
-
-
-
-
 @enduml

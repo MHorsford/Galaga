@@ -8,15 +8,24 @@ class Bullet {
     - isPlayerBullet: bool
     - MAX_SPEED: static const double
     + Bullet()
-    + Bullet(bulletX: double, bulletY: double, isPlayerBullet: bool)
-    + Bullet(copyBullet: Bullet&)
+    + Bullet(double, double, bool)
+    + Bullet(Bullet&)
     + moveBullet()
 }
 
 class Laser {
     + Laser()
-    + Laser(bulletX: double, bulletY: double, isPlayerBullet: bool)
+    + Laser(double, double, bool)
     + Laser(copyLaser: Laser&)
+    + continousDamage(Interceptor&, Enemy&, Collision&)
+}
+class Missile {
+    + Missile()
+    + Missile(double, double, bool)
+    + Missile(Missile&)
+    + explosiveDamage(Interceptor&, Enemy&, Collision&)
+
 }
 
 Bullet <|-- Laser
+Laser <|-- Missile
