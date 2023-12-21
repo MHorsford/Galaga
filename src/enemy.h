@@ -33,6 +33,8 @@ class Enemy{
     bool operator!=(const Enemy& otherEnemy) const;
     Enemy& operator=(const Enemy& otherEnemy);
     friend std::ostream& operator<<(std::ostream& out, const Enemy& enemy);
+
+    
     void shootBullet(double bulletX, double bulletY, bool isPlayerBullet);
 
     // getters e setters

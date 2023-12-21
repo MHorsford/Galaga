@@ -7,12 +7,9 @@
 class Bullet;
 class Collision{
     public:
-
     void waveCollision(EnemyWave& wave, Enemy& newEnemy);
     bool checkCollision(Fighter& fighter, Enemy& enemy, Bullet& bullet);
 
-
-    private:
 };
 
 #endif

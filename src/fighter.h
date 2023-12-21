@@ -19,10 +19,14 @@ class Bullet;
 class EnemyWave;
 class Enemy;
 
-struct PowerUp {
-    std::string name;
-    int effect;
+struct PowerUp{
+    enum Type {HEALTH, PROTECT, SPEED, DAMAGE};
+    Type type;
+    int value;
+    PowerUp(Type type);
+
 };
+
 
 class SpaceShip {
     public:
@@ -35,6 +39,10 @@ class SpaceShip {
     virtual void attack(EnemyWave& target) = 0;
     virtual void saveConfig() = 0;
     virtual void loadConfig(const string& filename) = 0;
+
+    void addPowerUp(PowerUp* powerUp);
+    void applyEffects();
+
 
     // setters and getters
     void set_name(const std::string newName);
@@ -61,12 +69,15 @@ class SpaceShip {
 
     protected:
     enum BulletType {BULLET, LASER, MISSILE};
+    vector<PowerUp*> powerUps;
     const static double MAX_SPEED;
+    const static int MAX_HEALTH;
     static BulletType currentBullet;
+    
 
 
     private:
-    std::string name;
+    string name;
     int health;
     double speed;
     int damage;
@@ -100,24 +111,29 @@ class Fighter: public SpaceShipII {
     void specialAbility();
     void attack(EnemyWave& target) override;
     void calculatePlayerScore(const Enemy& enemy);
-    void addPowerUp(const std::string& name, int effect);
     virtual void shootBullet(double bulletX, double bulletY, bool isPlayerBullet);
     void update();
     void saveConfig() override;
     void loadConfig(const string& filename) override;
 
-    // METODOS DE NÃO UTILITARIOS
+
+
     void evade() override;
     void shield() override;
 
-    // SOBRECARGA
+ 
     friend std::ostream& operator<<(std::ostream& out, const Fighter& fighter);
+    Fighter& operator=(const Fighter& otherFighter);
+    bool operator==(const Fighter& fighter);
+    bool operator!=(const Fighter& fighter);
+    bool operator!();
+
     
     // setter and getter
     Data getUserData() const;
     void printUserData() const;
-    int get_score(std::string name) const;
-    std::map<std::string, int> getPlayerScore() const;
+    int get_score(string name) const;
+    std::map<string, int> getPlayerScore() const;
     vector<Bullet*> getBullet() const;
 
 
@@ -126,7 +142,6 @@ class Fighter: public SpaceShipII {
 
     private:
     ConfigManager configManager;
-    std::vector<PowerUp> powerUps;
     map<std::string, int> playerScore;
     Data data;
     int score; 
@@ -144,6 +159,13 @@ class Interceptor : public Fighter{
     void evade() override;
     void shield() override;
     void laser();
+
+    // SOBRECARGA =, ==, ≠, ! e <<
+    friend std::ostream& operator<<(std::ostream& out, const Interceptor& interceptor);
+    Interceptor& operator=(const Interceptor& otherInterceptor);
+    bool operator==(const Interceptor& interceptor);
+    bool operator!=(const Interceptor& interceptor);
+    bool operator!();
 
     private:
     static int laserCount;
@@ -163,6 +185,13 @@ class Destroyer : public Interceptor{
     void evade() override;
     void shield() override;
     void missile();
+
+    // SOBRECARGA =, ==, ≠, ! e <<
+    friend std::ostream& operator<<(std::ostream& out, const Destroyer& destroyer);
+    Destroyer& operator=(const Destroyer& otherDestroyer);
+    bool operator==(const Destroyer& destroyer);
+    bool operator!=(const Destroyer& destroyer);
+    bool operator!();
 
     private:
     static int missileCount;
